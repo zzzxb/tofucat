@@ -1,3 +1,3 @@
 # Navigation
 
-> An awesome project.
+* [shell command](./shell_command.md) 常用 shell 命令
