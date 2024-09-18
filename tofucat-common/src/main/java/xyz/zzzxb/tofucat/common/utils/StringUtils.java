@@ -28,7 +28,7 @@ public class StringUtils {
 
     /**
      * The result was the opposite
-     * @see xyz.zzzxb.donkey.common.utils.StringUtils#isBlank(String) 
+     * @see xyz.zzzxb.tofucat.common.utils.StringUtils#isBlank(String)
      */
     public static boolean isNotBlank(String str) {
         return !isBlank(str);
@@ -82,5 +82,15 @@ public class StringUtils {
             matcher.reset(str);
         }
         return str;
+    }
+
+    public static String firstUpper(String str) {
+        if(isNotBlank(str)) {
+            char firstChar = str.charAt(0);
+            String capitalizeFirstChar = Character.toString(firstChar).toUpperCase();
+            String remainder = str.substring(1);
+            return capitalizeFirstChar + remainder;
+        }
+        throw new RuntimeException("字符串不能为空");
     }
 }
