@@ -1,12 +1,32 @@
 plugins {
-    id("java-library")
+    `java-library`
+    `maven-publish`
 }
 
 group = "xyz.zzzxb.tofucat.protocol"
 version = "1.0.0"
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
+    }
+}
+
 repositories {
     mavenCentral()
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            from(components["java"])
+        }
+    }
+    repositories {
+        maven {
+            uri(file("/opt/data/mvn_repo"))
+        }
+    }
 }
 
 dependencies {
