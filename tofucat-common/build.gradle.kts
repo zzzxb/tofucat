@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "xyz.zzzxb.tofucat"
-version = "1.0.0"
+version = "1.1.0"
 
 java {
     toolchain {
@@ -39,6 +39,7 @@ publishing {
 }
 
 dependencies {
+    implementation("com.google.code.gson:gson:2.11.0")
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
 }

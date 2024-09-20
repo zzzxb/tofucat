@@ -1,9 +1,7 @@
 package xyz.zzzxb.tofucat.common.utils;
 
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -32,7 +30,7 @@ public final class FileUtils {
         }
     }
 
-    public static String joinPath(String ... pathNodeNames) {
+    public static String joinPath(String... pathNodeNames) {
         return StringUtils.join(File.separator, pathNodeNames);
     }
 
@@ -67,5 +65,22 @@ public final class FileUtils {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static String readInternal(String path) {
+        InputStream inputStream = FileUtils.class.getResourceAsStream(path);
+        if (inputStream == null) throw new RuntimeException(StringUtils.format("File not found: {}",
+                new File(path).getAbsoluteFile()));
+
+        StringBuilder contentBuilder = new StringBuilder();
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                contentBuilder.append(line).append("\n");
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(StringUtils.format("An error occurred while reading the file: {}", e.getMessage()));
+        }
+        return contentBuilder.toString();
     }
 }
