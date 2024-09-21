@@ -78,7 +78,7 @@ public class StringUtils {
         ArrayDeque<Object> deque = new ArrayDeque<>(Arrays.asList(args));
         Matcher matcher = pattern.matcher(str);
         while (matcher.find()) {
-            str = matcher.replaceFirst(spare((String) deque.poll(), ""));
+            str = matcher.replaceFirst(spare(String.valueOf(deque.poll()), ""));
             matcher.reset(str);
         }
         return str;
