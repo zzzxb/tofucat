@@ -5,5 +5,10 @@ package xyz.zzzxb.tofucat.common.op;
  * 2024/9/20
  */
 public enum OpType {
-    MOBILE, UNICOM, TELCOM, BN, NO_OP, INVALID
+    MOBILE,
+    UNICOM,
+    TELECOM,
+    BN,
+    NO_OP,
+    INVALID
 }
