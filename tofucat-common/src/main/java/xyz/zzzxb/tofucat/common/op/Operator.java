@@ -19,7 +19,8 @@ public class Operator {
         JsonObject jo = JsonParser.parseString(s).getAsJsonObject();
         jo.getAsJsonArray("mobile").forEach(info -> OP_MAP.put(info.getAsString(), OpType.MOBILE));
         jo.getAsJsonArray("unicom").forEach(info -> OP_MAP.put(info.getAsString(), OpType.UNICOM));
-        jo.getAsJsonArray("telecom").forEach(info -> OP_MAP.put(info.getAsString(), OpType.TELCOM));
+        jo.getAsJsonArray("telecom").forEach(info -> OP_MAP.put(info.getAsString(), OpType.TELECOM));
+        jo.getAsJsonArray("bn").forEach(info -> OP_MAP.put(info.getAsString(), OpType.BN));
         jo.getAsJsonArray("no_op").forEach(info -> OP_MAP.put(info.getAsString(), OpType.NO_OP));
     }
 
