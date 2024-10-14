@@ -4,8 +4,7 @@ package xyz.zzzxb.tofucat.common.compression;
 import xyz.zzzxb.tofucat.common.utils.CheckParamUtils;
 import xyz.zzzxb.tofucat.common.utils.FileUtils;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Collection;
@@ -102,6 +101,28 @@ public class Zip implements CompressionFile {
 
         File file = new File(outPath);
         return new CompressFileInfo(file.getName(), file.length(), file.getAbsolutePath(), fileNameList);
+    }
+
+    public ByteArrayOutputStream compressFileToByte(Collection<FileInfo> fileInfos, boolean serial, int custom) {
+        CheckParamUtils.collectionIsEmpty(fileInfos).throwMessage("filepath is empty");
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try(ZipOutputStream zipOutputStream = new ZipOutputStream(baos)) {
+            int index = custom;
+            for (FileInfo fileInfo : fileInfos) {
+                String filename = serial ?
+                        (fileInfo.getFileType().isEmpty() ? String.valueOf(index) : index  + "." + fileInfo.getFileType()) :
+                        fileInfo.getFileFullName();
+                zipOutputStream.putNextEntry(new ZipEntry(filename));
+                // 压缩大文件的话，这里可以使用缓冲流
+                zipOutputStream.write(fileInfo.getFileContent());
+                zipOutputStream.closeEntry();
+                index++;
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return baos;
     }
 
 }

@@ -15,7 +15,7 @@ public class Operator {
     private final ConcurrentHashMap<String, OpType> OP_MAP = new ConcurrentHashMap<>();
 
     public void load() {
-        String s = FileUtils.readInternal("/op.json");
+        String s = FileUtils.readInternal("op.json");
         JsonObject jo = JsonParser.parseString(s).getAsJsonObject();
         jo.getAsJsonArray("mobile").forEach(info -> OP_MAP.put(info.getAsString(), OpType.MOBILE));
         jo.getAsJsonArray("unicom").forEach(info -> OP_MAP.put(info.getAsString(), OpType.UNICOM));
