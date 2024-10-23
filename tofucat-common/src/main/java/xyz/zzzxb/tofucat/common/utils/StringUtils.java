@@ -54,7 +54,7 @@ public class StringUtils {
     public static String join(String symbol, String ...str){
         if(str == null || str.length == 0) return "";
         StringBuilder sb = new StringBuilder();
-        if(isBlank(symbol)) {
+        if(symbol == null) {
             Arrays.stream(str).forEach(sb::append);
         }else {
             for (int i = 0; i < str.length; i++) {
