@@ -20,6 +20,7 @@ public class ChannelCMPP extends ChannelInitializer<SocketChannel> {
         socketChannel.pipeline()
                 .addLast(new LoginHandler(message))
                 .addLast(new SubmitHandler(message))
-                .addLast(new DeliveredHandler());
+                .addLast(new DeliveredHandler())
+                .addLast(new ActiveHandler());
     }
 }
