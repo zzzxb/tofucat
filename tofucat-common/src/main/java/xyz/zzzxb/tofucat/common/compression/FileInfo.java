@@ -16,8 +16,9 @@ public class FileInfo {
 
     FileInfo(String fileFullName, long fileSize) {
         this.fileSize = fileSize;
-        this.fileType = fileFullName.substring(fileFullName.lastIndexOf(".") + 1);
-        this.filename = fileFullName.substring(0, fileFullName.lastIndexOf("."));
+        boolean isSuffix = fileFullName.contains(".");
+        this.fileType = isSuffix ? fileFullName.substring(fileFullName.lastIndexOf(".") + 1) : "";
+        this.filename = isSuffix ? fileFullName.substring(0, fileFullName.lastIndexOf(".")) : fileFullName;
         if(filename.isEmpty()) {
             this.filename = fileFullName;
             this.fileType = "";

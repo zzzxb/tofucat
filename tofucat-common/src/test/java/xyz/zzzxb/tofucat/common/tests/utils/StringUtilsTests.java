@@ -34,7 +34,7 @@ public class StringUtilsTests {
 
     @Test
     public void format() {
-        Assertions.assertEquals(StringUtils.format("d{}n{}{}"), "dn");
+        Assertions.assertEquals("dn", StringUtils.format("d{}n{}{}"));
         Assertions.assertEquals(StringUtils.format("d{}n{}{}","o", "k", "ey"), "donkey");
     }
 }

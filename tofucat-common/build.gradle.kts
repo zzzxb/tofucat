@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "xyz.zzzxb.tofucat"
-version = "1.2.3"
+version = "1.2.4"
 
 java {
     toolchain {
@@ -29,7 +29,7 @@ publishing {
             val passwd = System.getenv("GITHUB_TOKEN")
             val repo = System.getenv("GITHUB_REPOSITORY")
 
-            url = uri("https://maven.pkg.github.com/${uname}/${repo}")
+            url = uri("/${uname}/${repo}")
             credentials {
                 username = uname;
                 password = passwd
@@ -40,8 +40,14 @@ publishing {
 
 dependencies {
     implementation("com.google.code.gson:gson:2.11.0")
+    implementation("org.projectlombok:lombok:1.18.36")
+    annotationProcessor("org.projectlombok:lombok:1.18.36")
+
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+
+    testImplementation("org.projectlombok:lombok:1.18.36")
+    testAnnotationProcessor("org.projectlombok:lombok:1.18.36")
 }
 
 

@@ -2,6 +2,8 @@ package xyz.zzzxb.tofucat.common.utils;
 
 import java.util.ArrayDeque;
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -75,10 +77,17 @@ public class StringUtils {
         if(isBlank(str) || !str.contains("{}")) {
             return str;
         }
-        ArrayDeque<Object> deque = new ArrayDeque<>(Arrays.asList(args));
+        int count = 0;
+        List<Object> list = new LinkedList<>(Arrays.asList(args));
         Matcher matcher = pattern.matcher(str);
         while (matcher.find()) {
-            str = matcher.replaceFirst(spare(String.valueOf(deque.poll()), ""));
+            String v = "";
+            if(!list.isEmpty()) {
+                Object o = list.get(0);
+                list.remove(o);
+                v = String.valueOf(o);
+            }
+            str = matcher.replaceFirst(v);
             matcher.reset(str);
         }
         return str;
