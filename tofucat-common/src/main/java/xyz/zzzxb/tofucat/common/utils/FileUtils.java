@@ -1,12 +1,15 @@
 package xyz.zzzxb.tofucat.common.utils;
 
 
+import xyz.zzzxb.tofucat.common.exception.ParamException;
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Collection;
+import java.util.*;
+import java.util.stream.Stream;
 
 /**
  * zzzxb
@@ -53,6 +56,64 @@ public final class FileUtils {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static String readFirstLine(String filePath) {
+        try(Stream<String> lines = Files.lines(new File(filePath).toPath())) {
+            Optional<String> first = lines.findFirst();
+            return first.orElse("");
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    public static long countLines(String filePath) {
+        try(Stream<String> lines = Files.lines(new File(filePath).toPath())) {
+            return lines.count();
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    public static List<String> readLineRange(String filePath, int begin, int end) {
+        List<String> contentList = new LinkedList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String content;
+            int currentLine = 0;
+            while ((content = br.readLine()) != null) {
+                currentLine++;
+                if(currentLine > end) return contentList;
+
+                if (currentLine >= begin) {
+                    contentList.add(content);
+                }
+            }
+        } catch (IOException e) {
+            throw new ParamException(e.getMessage());
+        }
+        return contentList;
+    }
+
+    public static List<String> readLine(String filePath, Integer ...lines) {
+        List<Integer> list = Arrays.asList(lines);
+        List<String> contentList = new LinkedList<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String content;
+            int currentLine = 0;
+            while ((content = br.readLine()) != null) {
+                currentLine++;
+                if (list.contains(currentLine)) {
+                    contentList.add(content);
+                }
+                if(lines.length == contentList.size()) {
+                    return contentList;
+                }
+            }
+        } catch (IOException e) {
+            throw new ParamException(e.getMessage());
+        }
+        return contentList;
     }
 
     public static byte[] read(String filePath) {

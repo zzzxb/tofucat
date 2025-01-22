@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "xyz.zzzxb.tofucat"
-version = "1.2.4"
+version = "1.2.9"
 
 java {
     toolchain {
@@ -29,7 +29,7 @@ publishing {
             val passwd = System.getenv("GITHUB_TOKEN")
             val repo = System.getenv("GITHUB_REPOSITORY")
 
-            url = uri("/${uname}/${repo}")
+            url = uri("https://maven.pkg.github.com/${uname}/${repo}")
             credentials {
                 username = uname;
                 password = passwd

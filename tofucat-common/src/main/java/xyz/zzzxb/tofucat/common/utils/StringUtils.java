@@ -1,9 +1,6 @@
 package xyz.zzzxb.tofucat.common.utils;
 
-import java.util.ArrayDeque;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
