@@ -50,17 +50,22 @@ public class StringUtils {
         return join(null, str);
     }
 
-    public static String join(String symbol, String ...str){
-        if(str == null || str.length == 0) return "";
+    public static String join(List<String> strList, String symbol) {
+        if(strList == null || strList.isEmpty()) return "";
         StringBuilder sb = new StringBuilder();
         if(symbol == null) {
-            Arrays.stream(str).forEach(sb::append);
+            strList.forEach(sb::append);
         }else {
-            for (int i = 0; i < str.length; i++) {
-                sb.append(str[i]).append((i != str.length - 1) ? symbol : "");
+            for (int i = 0; i < strList.size(); i++) {
+                sb.append(strList.get(i)).append((i != strList.size() - 1) ? symbol : "");
             }
         }
         return sb.toString();
+    }
+
+    public static String join(String symbol, String ...str){
+        if(str == null || str.length == 0) return "";
+        return join(Arrays.asList(str), symbol);
     }
 
     /**

@@ -17,20 +17,24 @@ import java.util.stream.Stream;
  */
 public final class FileUtils {
 
-    public static void canCreateDirectories(String dirPath) {
+    public static boolean canCreateDirectories(String dirPath) {
         if (!exists(dirPath)) {
             try {
                 Path path = Files.createDirectories(Paths.get(dirPath));
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
+            return true;
         }
+        return false;
     }
 
-    public static void canCreateFile(String filePath, String content) {
+    public static boolean canCreateFile(String filePath, String content) {
         if (!exists(filePath)) {
             write(content.getBytes(StandardCharsets.UTF_8), filePath);
+            return true;
         }
+        return false;
     }
 
     public static String joinPath(String... pathNodeNames) {
