@@ -3,7 +3,7 @@ plugins {
     `maven-publish`
 }
 
-group = "xyz.zzzxb.tofucat"
+group = "cn.tofucat"
 version = "1.2.10"
 
 java {

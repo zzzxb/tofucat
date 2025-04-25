@@ -2,7 +2,7 @@ plugins {
     id("java")
 }
 
-group = "xyz.zzzxb.tofucat"
+group = "cn.tofucat"
 version = "1.0-SNAPSHOT"
 
 repositories {
@@ -10,8 +10,10 @@ repositories {
 }
 
 dependencies {
-    implementation(project(":tofucat-common"))
     implementation("com.google.code.gson:gson:2.11.0")
+
+    implementation(project(":tofucat-common"))
+
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
 }

@@ -2,7 +2,7 @@ plugins {
     id("base")
 }
 
-group = "xyz.zzzxb.tofucat"
+group = "cn.tofucat"
 version = "1.0.0"
 
 repositories {
