@@ -11,10 +11,10 @@ public class StringUtilsTests {
 
     @Test
     public void spare() {
-        Assertions.assertEquals(StringUtils.spare("a", "b"), "a");
-        Assertions.assertEquals(StringUtils.spare("", "b"), "b");
-        Assertions.assertEquals(StringUtils.spare(null, "b"), "b");
-        Assertions.assertEquals(StringUtils.spare("\n", "b"), "b");
+        Assertions.assertEquals("a", StringUtils.spare("a", "b"));
+        Assertions.assertEquals("b", StringUtils.spare("", "b"));
+        Assertions.assertEquals("b", StringUtils.spare(null, "b"));
+        Assertions.assertEquals("b", StringUtils.spare("\n", "b"));
     }
 
     @Test
@@ -35,6 +35,6 @@ public class StringUtilsTests {
     @Test
     public void format() {
         Assertions.assertEquals("dn", StringUtils.format("d{}n{}{}"));
-        Assertions.assertEquals(StringUtils.format("d{}n{}{}","o", "k", "ey"), "donkey");
+        Assertions.assertEquals("donkey", StringUtils.format("d{}n{}{}","o", "k", "ey"));
     }
 }
